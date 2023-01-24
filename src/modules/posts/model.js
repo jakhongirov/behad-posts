@@ -47,8 +47,8 @@ const ADD_POST = `
         posts (
             post_title,
             post_desc,
-            psot_img,
-            psot_img_name,
+            post_img,
+            post_img_name,
             category_id
         )
     VALUES  
@@ -67,8 +67,8 @@ const UPADATE_POST = `
     SET
         post_title = $2,
         post_desc = $3,
-        psot_img = $4,
-        psot_img_name = $5,
+        post_img = $4,
+        post_img_name = $5,
         category_id = $6
     WHERE
         post_id = $1 RETURNING * ;
