@@ -113,15 +113,15 @@ module.exports = {
             let image_url = "";
 
             if (postsById) {
-                const deleteOldLogo = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${postsById?.psot_img_name}`))
+                const deleteOldLogo = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${postsById?.post_img_name}`))
 
                 if (uploadPhoto) {
                     deleteOldLogo.delete()
                     image_name = uploadPhoto.filename
                     image_url = `https://posts.behad.uz/public/images/${uploadPhoto.filename}`
                 } else {
-                    image_url = postsById?.psot_img
-                    image_name = postsById?.psot_img_name
+                    image_url = postsById?.post_img
+                    image_name = postsById?.post_img_name
                 }
 
                 const updatePost = await model.updatePost(id, title, desc, image_url, image_name, categoryId,)
@@ -157,7 +157,7 @@ module.exports = {
         try {
             const { id } = req.body
             const postsById = await model.getpostsById(id)
-            const deleteOldLogo = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${postsById?.psot_img_name}`))
+            const deleteOldLogo = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${postsById?.post_img_name}`))
             const deletePost = await model.deletePost(id)
 
             if (deletePost) {
