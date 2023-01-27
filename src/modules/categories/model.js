@@ -79,6 +79,28 @@ const DELETE_CATEGORY = `
     RETURNING *;
 `
 
+const CATEGORIES_BY_LIMIT_NEXT = `
+    SELECT
+        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+    FROM
+        categories
+    WHERE
+        app_key = $1 and category_id < $2
+    ORDER BY
+        category_id DESC;
+`;
+
+const CATEGORIES_BY_LIMIT_PREV = `
+    SELECT
+        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+    FROM
+        categories
+    WHERE
+        app_key = $1 and category_id > $2
+    ORDER BY
+        category_id DESC;
+`;
+
 const getCategories = () => fetchALL(CATEGORIES);
 const getCategoryByid = (id) => fetch(CATEGORIES_BY_ID, id);
 const getCategoryBytitle = (title) => fetchALL(CATEGORIES_BY_TITLE, title);
@@ -86,6 +108,8 @@ const getCategoryByAppKey = (key) => fetchALL(CATEGORIES_BY_APP_KEY, key)
 const addCategory = (name, image_url, image_name, app_key) => fetch(ADD_CATEGORY, name, image_url, image_name, app_key)
 const updateCategory = (id, name, image_name, image_url, app_key) => fetch(UPADATE_CATEGORY, id, name, image_url, image_name, app_key)
 const deleteCategory = (id) => fetch(DELETE_CATEGORY, id)
+const getCategoriesByLimitNext = (key, id) => fetchALL(CATEGORIES_BY_LIMIT_NEXT, key, id)
+const getCategoriesByLimitPrev = (key, id) => fetchALL(CATEGORIES_BY_LIMIT_PREV, key, id)
 
 module.exports = {
     getCategories,
@@ -94,5 +118,7 @@ module.exports = {
     getCategoryByAppKey,
     addCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    getCategoriesByLimitNext,
+    getCategoriesByLimitPrev
 }

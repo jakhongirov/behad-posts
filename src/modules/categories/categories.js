@@ -5,9 +5,39 @@ const FS = require('../../lib/fs')
 module.exports = {
     GET_CATEGORIES: async (req, res) => {
         try {
-            const { id, title, key } = req.query
+            const { id, title, key, position } = req.query
 
-            if (id) {
+            if (position == "next" && key && id) {
+                const categoriesByLimitNext = await model.getCategoriesByLimitNext(key, id)
+
+                if (categoriesByLimitNext) {
+                    return res.json({
+                        status: 200,        
+                        message: "Success",
+                        data: categoriesByLimitNext
+                    })
+                } else {
+                    return res.json({
+                        status: 404,
+                        message: "Not found"
+                    })
+                }
+            } else if (position == "prev" && key && id) {
+                const categoriesByLimitPrev = await model.getCategoriesByLimitPrev(key, id)
+
+                if (categoriesByLimitPrev) {
+                    return res.json({
+                        status: 200,
+                        message: "Success",
+                        data: categoriesByLimitPrev
+                    })
+                } else {
+                    return res.json({
+                        status: 404,
+                        message: "Not found"
+                    })
+                }
+            } else if (id) {
                 const categoryByid = await model.getCategoryByid(id)
 
                 if (categoryByid) {
