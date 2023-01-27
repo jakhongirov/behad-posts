@@ -31,6 +31,17 @@ const CATEGORIES_BY_TITLE = `
         category_id DESC;
 `;
 
+const CATEGORIES_BY_APP_KEY = `
+    SELECT
+        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+    FROM
+        categories
+    WHERE
+        app_key = $1
+    ORDER BY
+        category_id DESC;
+`;
+
 const ADD_CATEGORY = `
     INSERT INTO
         categories (
@@ -71,6 +82,7 @@ const DELETE_CATEGORY = `
 const getCategories = () => fetchALL(CATEGORIES);
 const getCategoryByid = (id) => fetch(CATEGORIES_BY_ID, id);
 const getCategoryBytitle = (title) => fetchALL(CATEGORIES_BY_TITLE, title);
+const getCategoryByAppKey = (key) => fetchALL(CATEGORIES_BY_APP_KEY, key)
 const addCategory = (name, image_url, image_name, app_key) => fetch(ADD_CATEGORY, name, image_url, image_name, app_key)
 const updateCategory = (id, name, image_name, image_url, app_key) => fetch(UPADATE_CATEGORY, id, name, image_url, image_name, app_key)
 const deleteCategory = (id) => fetch(DELETE_CATEGORY, id)
@@ -79,6 +91,7 @@ module.exports = {
     getCategories,
     getCategoryByid,
     getCategoryBytitle,
+    getCategoryByAppKey,
     addCategory,
     updateCategory,
     deleteCategory

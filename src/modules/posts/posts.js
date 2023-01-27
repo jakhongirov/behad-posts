@@ -5,7 +5,7 @@ const FS = require('../../lib/fs')
 module.exports = {
     GET_POSTS: async (req, res) => {
         try {
-            const { categoryId, title, id } = req.query
+            const { categoryId, title, id, key, position } = req.query
 
             if (categoryId) {
                 const postsByCategortId = await model.getpostsByCategortId(categoryId)
@@ -23,6 +23,51 @@ module.exports = {
                     })
                 }
 
+            } else if (position == "next" && key && id) {
+                const postsByLimitNext = await model.getpostsByLimitNext(key, id)
+
+                if (postsByLimitNext) {
+                    return res.json({
+                        status: 200,
+                        message: "Success",
+                        data: postsByLimitNext
+                    })
+                } else {
+                    return res.json({
+                        status: 404,
+                        message: "Not found"
+                    })
+                }
+            } else if (position == "prev" && key && id) {
+                const postsByLimitPrev = await model.getpostsByLimitPrev(key, id)
+
+                if (postsByLimitPrev) {
+                    return res.json({
+                        status: 200,
+                        message: "Success",
+                        data: postsByLimitPrev
+                    })
+                } else {
+                    return res.json({
+                        status: 404,
+                        message: "Not found"
+                    })
+                }
+            } else if (key) {
+                const postsByAppKey = await model.getpostsByAppKey(key)
+
+                if (postsByAppKey) {
+                    return res.json({
+                        status: 200,
+                        message: "Success",
+                        data: postsByAppKey
+                    })
+                } else {
+                    return res.json({
+                        status: 404,
+                        message: "Not found"
+                    })
+                }
             } else if (id) {
                 const postsById = await model.getpostsById(id)
 

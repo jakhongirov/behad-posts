@@ -37,9 +37,33 @@ const POSTS_BY_TITLE = `
     FROM
         posts
     WHERE
-        category_name LIKE $1
+        post_title LIKE $1
     ORDER BY
-        category_id DESC;
+        post_id DESC;
+`;
+
+const POSTS_BY_APP_KEY = `
+    SELECT
+        p.post_id,
+        p.post_title,
+        p.post_desc,
+        p.post_img,
+        p.post_img_name,
+        p.like_count,
+        p.dislike_count,
+        p.view_count,
+        to_char(p.post_create_date, 'HH24:MM/MM.DD.YYYY')
+    FROM
+        posts p
+    INNER JOIN 
+        categories c
+    ON 
+        c.category_id = p.category_id
+    WHERE
+        c.app_key = $1
+    ORDER BY
+        p.post_id DESC
+   LIMIT 100;
 `;
 
 const ADD_POST = `
@@ -109,9 +133,58 @@ const UPDATE_VIEW_COUNT = `
         post_id = $1 RETURNING * ;
 `;
 
+const POSTS_LIMIT_NEXT = `
+    SELECT
+        p.post_id,
+        p.post_title,
+        p.post_desc,
+        p.post_img,
+        p.post_img_name,
+        p.like_count,
+        p.dislike_count,
+        p.view_count,
+        to_char(p.post_create_date, 'HH24:MM/MM.DD.YYYY')
+    FROM
+        posts p
+    INNER JOIN 
+        categories c
+    ON 
+        c.category_id = p.category_id
+    WHERE
+        c.app_key = $1 and p.post_id < $2
+    ORDER BY
+        p.post_id DESC
+   LIMIT 100;
+`;
+
+const POSTS_LIMIT_PREV = `
+    SELECT
+        p.post_id,
+        p.post_title,
+        p.post_desc,
+        p.post_img,
+        p.post_img_name,
+        p.like_count,
+        p.dislike_count,
+        p.view_count,
+        to_char(p.post_create_date, 'HH24:MM/MM.DD.YYYY')
+    FROM
+        posts p
+    INNER JOIN 
+        categories c
+    ON 
+        c.category_id = p.category_id
+    WHERE
+        c.app_key = $1 and p.post_id > $2
+    ORDER BY
+        p.post_id DESC
+   LIMIT 100;
+`;
+
 const getpostsByCategortId = (categoryId) => fetchALL(POSTS_BY_CATEGORY_ID, categoryId)
 const getpostsById = (id) => fetch(POSTS_BY_ID, id)
 const getpostsByTitle = (title) => fetchALL(POSTS_BY_TITLE, title)
+const getpostsByAppKey = (key) => fetchALL(POSTS_BY_APP_KEY, key)
 const getAllPosts = () => fetchALL(POSTS)
 const addPost = (title, desc, image_url, image_name, categoryId) => fetch(ADD_POST, title, desc, image_url, image_name, categoryId)
 const updatePost = (id, title, desc, image_url, image_name, categoryId) => fetch(UPADATE_POST, id, title, desc, image_url, image_name, categoryId)
@@ -119,16 +192,21 @@ const deletePost = (id) => fetch(DELETE_POST, id)
 const updateLike = (id, count) => fetch(UPDATE_LIKE_COUNT, id, count)
 const updateDisike = (id, count) => fetch(UPDATE_DISLIKE_COUNT, id, count)
 const updateView = (id, count) => fetch(UPDATE_VIEW_COUNT, id, count)
+const getpostsByLimitNext = (key, id) => fetchALL(POSTS_LIMIT_NEXT, key, id)
+const getpostsByLimitPrev = (key, id) => fetchALL(POSTS_LIMIT_PREV, key, id)
 
 module.exports = {
     getpostsByCategortId,
     getpostsById,
     getpostsByTitle,
+    getpostsByAppKey,
     getAllPosts,
     addPost,
     updatePost,
     deletePost,
     updateLike,
     updateDisike,
-    updateView
+    updateView,
+    getpostsByLimitNext,
+    getpostsByLimitPrev
 }

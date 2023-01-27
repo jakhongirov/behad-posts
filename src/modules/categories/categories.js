@@ -5,7 +5,7 @@ const FS = require('../../lib/fs')
 module.exports = {
     GET_CATEGORIES: async (req, res) => {
         try {
-            const { id, title } = req.query
+            const { id, title, key } = req.query
 
             if (id) {
                 const categoryByid = await model.getCategoryByid(id)
@@ -31,6 +31,21 @@ module.exports = {
                         status: 200,
                         message: "Success",
                         data: categoryBytitle
+                    })
+                } else {
+                    return res.json({
+                        status: 404,
+                        message: "Not found"
+                    })
+                }
+            } else if (key) {
+                const categoryByAppKey = await model.getCategoryByAppKey(key)
+
+                if (categoryByAppKey) {
+                    return res.json({
+                        status: 200,
+                        message: "Success",
+                        data: categoryByAppKey
                     })
                 } else {
                     return res.json({
@@ -107,7 +122,7 @@ module.exports = {
             if (categoryByid) {
                 const deleteOldLogo = await new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${categoryByid?.category_img_name}`))
 
-                if (uploadPhoto) {  
+                if (uploadPhoto) {
                     deleteOldLogo.delete()
                     image_name = uploadPhoto.filename
                     image_url = `https://posts.behad.uz/public/images/${uploadPhoto.filename}`
