@@ -178,7 +178,6 @@ const POSTS_LIMIT_PREV = `
         c.app_key = $1 and p.post_id > $2
     ORDER BY
         p.post_id DESC
-    OFFSET 0
     LIMIT 100;
 `;
 
