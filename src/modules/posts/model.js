@@ -2,7 +2,7 @@ const { fetch, fetchALL } = require("../../lib/postgres");
 
 const POSTS = `
     SELECT
-        *, to_char(post_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts
     ORDER BY
@@ -11,7 +11,7 @@ const POSTS = `
 
 const POSTS_BY_ID = `
     SELECT
-        *, to_char(post_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts
     WHERE
@@ -22,7 +22,7 @@ const POSTS_BY_ID = `
 
 const POSTS_BY_CATEGORY_ID = `
     SELECT
-        *, to_char(post_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts
     WHERE
@@ -33,7 +33,7 @@ const POSTS_BY_CATEGORY_ID = `
 
 const POSTS_BY_TITLE = `
     SELECT
-        *, to_char(post_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts
     WHERE
@@ -52,7 +52,7 @@ const POSTS_BY_APP_KEY = `
         p.like_count,
         p.dislike_count,
         p.view_count,
-        to_char(p.post_create_date, 'HH24:MM/MM.DD.YYYY')
+        to_char(p.post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts p
     INNER JOIN 
@@ -143,7 +143,7 @@ const POSTS_LIMIT_NEXT = `
         p.like_count,
         p.dislike_count,
         p.view_count,
-        to_char(p.post_create_date, 'HH24:MM/MM.DD.YYYY')
+        to_char(p.post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts p
     INNER JOIN 
@@ -167,7 +167,7 @@ const POSTS_LIMIT_PREV = `
         p.like_count,
         p.dislike_count,
         p.view_count,
-        to_char(p.post_create_date, 'HH24:MM/MM.DD.YYYY')
+        to_char(p.post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts p
     INNER JOIN 

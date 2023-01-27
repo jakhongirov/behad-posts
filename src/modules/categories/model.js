@@ -2,7 +2,7 @@ const { fetch, fetchALL } = require("../../lib/postgres");
 
 const CATEGORIES = `
     SELECT
-        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(category_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         categories
     ORDER BY
@@ -11,7 +11,7 @@ const CATEGORIES = `
 
 const CATEGORIES_BY_ID = `
     SELECT
-        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(category_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         categories
     WHERE
@@ -22,7 +22,7 @@ const CATEGORIES_BY_ID = `
 
 const CATEGORIES_BY_TITLE = `
     SELECT
-        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(category_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         categories
     WHERE
@@ -33,7 +33,7 @@ const CATEGORIES_BY_TITLE = `
 
 const CATEGORIES_BY_APP_KEY = `
     SELECT
-        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(category_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         categories
     WHERE
@@ -81,7 +81,7 @@ const DELETE_CATEGORY = `
 
 const CATEGORIES_BY_LIMIT_NEXT = `
     SELECT
-        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(category_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         categories
     WHERE
@@ -93,7 +93,7 @@ const CATEGORIES_BY_LIMIT_NEXT = `
 
 const CATEGORIES_BY_LIMIT_PREV = `
     SELECT
-        *, to_char(category_create_date, 'HH24:MM/MM.DD.YYYY')
+        *, to_char(category_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         categories
     WHERE
