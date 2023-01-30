@@ -6,7 +6,8 @@ const POSTS = `
     FROM
         posts
     ORDER BY
-        post_id DESC;
+        post_id DESC
+    LIMIT 50;
 `;
 
 const POSTS_BY_ID = `
@@ -63,7 +64,7 @@ const POSTS_BY_APP_KEY = `
         c.app_key = $1
     ORDER BY
         p.post_id DESC
-   LIMIT 100;
+   LIMIT 50;
 `;
 
 const ADD_POST = `
@@ -154,7 +155,7 @@ const POSTS_LIMIT_NEXT = `
         c.app_key = $1 and p.post_id < $2
     ORDER BY
         p.post_id DESC
-   LIMIT 100;
+   LIMIT 50;
 `;
 
 const POSTS_LIMIT_PREV = `
@@ -178,7 +179,7 @@ const POSTS_LIMIT_PREV = `
         c.app_key = $1 and p.post_id > $2
     ORDER BY
         p.post_id DESC
-    LIMIT 100;
+    LIMIT 50;
 `;
 
 const getpostsByCategortId = (categoryId) => fetchALL(POSTS_BY_CATEGORY_ID, categoryId)

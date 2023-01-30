@@ -6,7 +6,8 @@ const CATEGORIES = `
     FROM
         categories
     ORDER BY
-        category_id DESC;
+        category_id DESC
+    LIMIT 50;
 `;
 
 const CATEGORIES_BY_ID = `
@@ -88,7 +89,7 @@ const CATEGORIES_BY_LIMIT_NEXT = `
         app_key = $1 and category_id < $2
     ORDER BY
         category_id DESC
-    LIMIT 100;
+    LIMIT 50;
 `;
 
 const CATEGORIES_BY_LIMIT_PREV = `
@@ -100,7 +101,7 @@ const CATEGORIES_BY_LIMIT_PREV = `
         app_key = $1 and category_id > $2
     ORDER BY
         category_id DESC
-    LIMIT 100;
+    LIMIT 50;
 `;
 
 const getCategories = () => fetchALL(CATEGORIES);
