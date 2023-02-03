@@ -1,23 +1,28 @@
 const JWT = require('../lib/jwt')
+const model = require('../modules/apps/model')
 
 module.exports = {
-    AUTH: (req, res, next) => {
+    AUTH: async (req, res, next) => {
         try {
             const { token } = req.headers;
-            const userStatus = new JWT(token).verify()
-            
-            if (!token && !userStatus) {
-                res.json({
-                    status: 401,
-                    message: 'Unauthorized'
-                })
-            }
-            else if(userStatus.role == 'admin') {
+            const app = await model.getAppbyKeyAppAuth(token)
+
+            if (app) {
                 next()
+            } else {
+                const userStatus = new JWT(token).verify()
+
+                if (userStatus.role == 'admin') {
+                    next()
+                } else {
+                    res.json({
+                        status: 401,
+                        message: 'Unauthorized'
+                    })
+                }
             }
 
         } catch (err) {
-            console.log(err);
             res.json({
                 status: 401,
                 message: 'Unauthorized'

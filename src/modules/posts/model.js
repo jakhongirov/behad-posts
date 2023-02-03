@@ -53,6 +53,7 @@ const POSTS_BY_APP_KEY = `
         p.like_count,
         p.dislike_count,
         p.view_count,
+        p.category_id,
         to_char(p.post_create_date, 'HH24:MI/DD.MM.YYYY')
     FROM
         posts p
