@@ -19,6 +19,15 @@ const PILL_BY_ID = `
         pill_id = $1;
 `;
 
+const PILL_BY_NAME = `
+    SELECT
+        *, to_char(pill_create_date, 'HH24:MI/DD.MM.YYYY')
+    FROM
+        pills
+    WHERE
+        pill_name ilike $1;
+`;
+
 const PILLS_LIMIT_NEXT = `
     SELECT
         pill_id, pill_name, pill_category, to_char(pill_create_date, 'HH24:MI/DD.MM.YYYY')
@@ -88,6 +97,7 @@ const DELTETE_PILL = `
 
 const allPill = () => fetchALL(PILLS)
 const pillById = (id) => fetchALL(PILL_BY_ID, id)
+const pillByName = (name) => fetch(PILL_BY_NAME, name)
 const pillLimitNext = (id) => fetchALL(PILLS_LIMIT_NEXT, id)
 const pillLimitPrev = (id) => fetchALL(PILLS_LIMIT_PREV, id)
 const addPill = (name, type, producer, instruction, ingredient, category) => fetch(ADD_PILL, name, type, producer, instruction, ingredient, category)
@@ -97,6 +107,7 @@ const deletePill = (id) => fetch(DELTETE_PILL, id)
 module.exports = {
     allPill,
     pillById,
+    pillByName,
     pillLimitNext,
     pillLimitPrev,
     addPill,

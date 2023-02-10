@@ -5,7 +5,23 @@ module.exports = {
         try {
             const { position, name, id } = req.query
 
-            if (position == 'next' && id) {
+            if (name) {
+                const pillByName = await model.pillByName(`%${name}%`)
+
+                if (pillByName) {
+                    return res.json({
+                        status: 200,
+                        message: "Success",
+                        data: pillByName
+                    })
+                } else {
+                    return res.json({
+                        status: 400,
+                        message: "Bad request"
+                    })
+                }
+
+            } else if (position == 'next' && id) {
                 const pillLimitNext = await model.pillLimitNext(id)
 
                 if (pillLimitNext) {
