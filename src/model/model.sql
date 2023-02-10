@@ -19,3 +19,14 @@ CREATE TABLE posts (
     view_count int DEFAULT 0, 
     post_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE pills (
+    pill_id bigserial PRIMARY KEY,
+    pill_name text not null,
+    pill_type text not null,
+    pill_producer text not null,
+    pill_instruction text not null,
+    pill_active_ingredient text not null,
+    pill_category text not null,
+    pill_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
+);
