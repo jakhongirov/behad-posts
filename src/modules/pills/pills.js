@@ -135,6 +135,8 @@ module.exports = {
             if (id && name && type && producer && instruction && ingredient && category) {
                 const updatePill = await model.updatePill(id, name, type, producer, instruction, ingredient, category)
 
+                console.log(updatePill);
+
                 if (updatePill) {
                     return res.json({
                         status: 200,
