@@ -131,26 +131,15 @@ module.exports = {
     PUT: async (req, res) => {
         try {
             const { id, name, type, producer, instruction, ingredient, category } = req.body
+            const updatePill = await model.updatePill(id, name, type, producer, instruction, ingredient, category)
 
-            
-            if (id && name && type && producer && instruction && ingredient && category) {
-                console.log(id , name , type , producer , instruction , ingredient , category);
-                const updatePill = await model.updatePill(id, name, type, producer, instruction, ingredient, category)
-                
-                console.log(updatePill);
+            console.log(updatePill);
 
-                if (updatePill) {
-                    return res.json({
-                        status: 200,
-                        message: "Success"
-                    })
-                } else {
-                    return res.json({
-                        status: 400,
-                        message: "Bad request"
-                    })
-                }
-
+            if (updatePill) {
+                return res.json({
+                    status: 200,
+                    message: "Success"
+                })
             } else {
                 return res.json({
                     status: 400,
