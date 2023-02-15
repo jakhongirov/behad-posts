@@ -81,7 +81,7 @@ const UPDATE_PILL = `
         pill_producer = $4,
         pill_instruction = $5,
         pill_active_ingredient = $6,
-        pill_category = $7,
+        pill_category = $7
     WHERE
         pill_id = $1
     RETURNING *;
