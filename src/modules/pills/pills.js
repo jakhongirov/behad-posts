@@ -132,6 +132,8 @@ module.exports = {
         try {
             const { id, name, type, producer, instruction, ingredient, category } = req.body
 
+            console.log(id , name , type , producer , instruction , ingredient , category);
+
             if (id && name && type && producer && instruction && ingredient && category) {
                 const updatePill = await model.updatePill(id, name, type, producer, instruction, ingredient, category)
 
