@@ -97,7 +97,7 @@ const DELTETE_PILL = `
 
 const allPill = () => fetchALL(PILLS)
 const pillById = (id) => fetchALL(PILL_BY_ID, id)
-const pillByName = (name) => fetch(PILL_BY_NAME, name)
+const pillByName = (name) => fetchALL(PILL_BY_NAME, name)
 const pillLimitNext = (id) => fetchALL(PILLS_LIMIT_NEXT, id)
 const pillLimitPrev = (id) => fetchALL(PILLS_LIMIT_PREV, id)
 const addPill = (name, type, producer, instruction, ingredient, category) => fetch(ADD_PILL, name, type, producer, instruction, ingredient, category)
