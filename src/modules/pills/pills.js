@@ -72,7 +72,7 @@ module.exports = {
                 const allPill = await model.allPill()
 
                 const getRequestIpAddress = (request) => {
-                    const requestIpAddress = request.request.headers['X-Forwarded-For'] || request.request.connection.remoteAddress
+                    const requestIpAddress = request.headers['X-Forwarded-For'] || request.connection.remoteAddress
                     if (!requestIpAddress) return null
 
                     const ipv4 = new RegExp("(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)")
