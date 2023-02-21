@@ -1,5 +1,4 @@
 const model = require('./model');
-const RequestIp = require('@supercharge/request-ip')
 
 module.exports = {
     GET: async (req, res) => {
@@ -71,7 +70,7 @@ module.exports = {
 
             } else {
                 const allPill = await model.allPill()
-                const ip = RequestIp.getClientIp(req)
+                const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
                 console.log(ip);
 
