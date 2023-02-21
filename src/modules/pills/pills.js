@@ -1,4 +1,5 @@
 const model = require('./model');
+const RequestIp = require('@supercharge/request-ip')
 
 module.exports = {
     GET: async (req, res) => {
@@ -70,6 +71,9 @@ module.exports = {
 
             } else {
                 const allPill = await model.allPill()
+                const ip = RequestIp.getClientIp(req)
+
+                console.log(ip);
 
                 if (allPill) {
                     return res.json({
@@ -97,6 +101,8 @@ module.exports = {
     POST: async (req, res) => {
         try {
             const { name, type, producer, instruction, ingredient, category } = req.body
+
+            console.log(req.connection.remoteAddress.split(':').slice(-1)[0]);
 
             if (name && type && producer && instruction && ingredient && category) {
                 const addPill = await model.addPill(name, type, producer, instruction, ingredient, category)
@@ -132,8 +138,6 @@ module.exports = {
         try {
             const { id, name, type, producer, instruction, ingredient, category } = req.body
             const updatePill = await model.updatePill(id, name, type, producer, instruction, ingredient, category)
-
-            console.log(updatePill);
 
             if (updatePill) {
                 return res.json({

@@ -19,7 +19,7 @@ router
     .delete('/deletePost', AUTH, Post.DELETE_POST)
     .put('updateCount', Post.UPDATE_COUNT)
     
-    .get('/pills', AUTH, Pills.GET)
+    .get('/pills', Pills.GET)
     .post('/addPill', AUTH, Pills.POST)
     .put('/putPill', AUTH, Pills.PUT)
     .delete('/deletePill', AUTH, Pills.DELETE);
