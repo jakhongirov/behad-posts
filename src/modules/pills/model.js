@@ -7,7 +7,7 @@ const PILLS = `
         pills
     ORDER BY
         pill_id DESC
-    LIMIT 100;
+    LIMIT 50;
 `;
 
 const PILL_BY_ID = `
@@ -37,7 +37,7 @@ const PILLS_LIMIT_NEXT = `
         pill_id < $1
     ORDER BY
         pill_id DESC
-    LIMIT 100;
+    LIMIT 50;
 `;
 
 const PILLS_LIMIT_PREV = `
@@ -49,7 +49,7 @@ const PILLS_LIMIT_PREV = `
         pill_id > $1
     ORDER BY
         pill_id DESC
-    LIMIT 100;
+    LIMIT 50;
 `;
 
 const ADD_PILL = `
