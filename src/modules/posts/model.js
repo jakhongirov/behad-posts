@@ -112,7 +112,7 @@ const UPDATE_LIKE_COUNT = `
     UPDATE
         posts
     SET
-        like_count = $2,
+        like_count = $2
     WHERE
         post_id = $1 RETURNING * ;
 `;
@@ -121,7 +121,7 @@ const UPDATE_DISLIKE_COUNT = `
     UPDATE
         posts
     SET
-        dislike_count = $2,
+        dislike_count = $2
     WHERE
         post_id = $1 RETURNING * ;
 `;
@@ -130,7 +130,7 @@ const UPDATE_VIEW_COUNT = `
     UPDATE
         posts
     SET
-        view_count = $2,
+        view_count = $2
     WHERE
         post_id = $1 RETURNING * ;
 `;
